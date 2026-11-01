@@ -397,6 +397,130 @@
 
             .lock-ico { width: 44px; height: 44px; font-size: 1.2em; }
         }
+        /* ===================================================
+           MODO SUSPENSE (público não vê o resultado)
+           =================================================== */
+        .avatar-misterio { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-family: var(--font-t); font-weight: 800; font-size: 3.2em; color: var(--gold); background: radial-gradient(circle, #1b2a55 0%, #0b0f19 75%); text-shadow: 0 0 22px rgba(255,210,74,.8); animation: pulsaQ 1.8s ease-in-out infinite; }
+        .avatar-2 .avatar-misterio { color: var(--silver); text-shadow: 0 0 22px rgba(207,214,228,.8); }
+        .avatar-3 .avatar-misterio { color: var(--bronze); text-shadow: 0 0 22px rgba(217,138,74,.8); }
+        .suspense-card { text-align: center; padding: 34px 22px; border-radius: 16px; background: linear-gradient(160deg, rgba(255,210,74,.10), rgba(11,18,36,.85)); border: 1px dashed rgba(255,210,74,.5); color: var(--mut2); line-height: 1.5; max-width: 560px; margin: 10px auto; }
+        .suspense-card .sc-ico { font-size: 2.6em; margin-bottom: 8px; animation: pulsaQ 2s ease-in-out infinite; }
+        .suspense-card b { display: block; color: var(--gold); font-family: var(--font-t); font-size: 1.2em; letter-spacing: 1px; margin-bottom: 6px; }
+        .banner-suspense-admin { display: none; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap; max-width: 900px; margin: 0 auto 8px; padding: 8px 14px; border-radius: 40px; background: rgba(255,210,74,.08); border: 1px solid rgba(255,210,74,.45); color: var(--mut2); font-size: .85em; flex: 0 0 auto; }
+        .banner-suspense-admin b { color: var(--gold); }
+        .banner-suspense-admin .btn-apresentar { padding: 7px 16px; font-size: .9em; }
+        .btn-apresentar { background: linear-gradient(135deg, #fff3b0 0%, #ffd24a 40%, #f5a524 100%) !important; color: #1a1205 !important; box-shadow: 0 6px 22px rgba(255,210,74,.4) !important; }
+        #toast-box { z-index: 10200; }
+        @keyframes pulsaQ { 0%,100% { transform: scale(1); opacity: .85; } 50% { transform: scale(1.08); opacity: 1; } }
+
+        /* ===================================================
+           MODO APRESENTAÇÃO (somente admin)
+           =================================================== */
+        #apresentacao { position: fixed; inset: 0; z-index: 10000; display: none; overflow: hidden; cursor: pointer; user-select: none; -webkit-user-select: none; color: #fff; font-family: var(--font);
+            background: radial-gradient(ellipse at 50% 115%, #1d2d5c 0%, #0a1024 45%, #04060d 100%); }
+        #apresentacao.show { display: block; animation: fadeIn .6s ease; }
+        #apresentacao > * { position: absolute; }
+
+        .ap-luzes { inset: 0; pointer-events: none; z-index: 0; }
+        .ap-luzes::before, .ap-luzes::after { content: ''; position: absolute; top: -15%; width: 34vw; height: 135vh; background: linear-gradient(180deg, rgba(255,240,190,.20), rgba(255,240,190,0) 78%); clip-path: polygon(46% 0, 54% 0, 100% 100%, 0 100%); transform-origin: 50% 0; filter: blur(6px); animation: holofote 7s ease-in-out infinite alternate; }
+        .ap-luzes::before { left: 2%; }
+        .ap-luzes::after { right: 2%; animation-delay: -3.5s; animation-direction: alternate-reverse; }
+        @keyframes holofote { from { transform: rotate(-26deg); } to { transform: rotate(22deg); } }
+        #apresentacao.tensao .ap-luzes::before, #apresentacao.tensao .ap-luzes::after { animation-duration: .7s; background: linear-gradient(180deg, rgba(255,255,255,.28), rgba(255,255,255,0) 80%); }
+        #apresentacao.ouro .ap-luzes::before, #apresentacao.ouro .ap-luzes::after { background: linear-gradient(180deg, rgba(255,210,74,.35), rgba(255,210,74,0) 80%); animation-duration: 3s; }
+
+        .ap-palco { top: 17vh; bottom: 8vh; left: 0; right: 0; z-index: 1; }
+        .ap-vinheta { inset: 0; z-index: 2; pointer-events: none; opacity: 0; transition: opacity 1.2s ease; background: radial-gradient(ellipse 30% 50% at 50% 62%, transparent 0%, rgba(0,0,0,.88) 100%); }
+        #apresentacao.tensao .ap-vinheta { opacity: 1; }
+        .ap-topo { top: 3.5vh; left: 0; right: 0; text-align: center; z-index: 3; pointer-events: none; padding: 0 16px; }
+        .ap-sub { font-weight: 800; letter-spacing: .35em; color: var(--mut2); font-size: clamp(.7rem, 1.2vw, 1rem); }
+        .ap-titulo { font-family: var(--font-t); font-weight: 800; font-size: clamp(1.5rem, 3.6vw, 3.2rem); margin-top: .5vh; line-height: 1.1;
+            background: linear-gradient(100deg, #fff3b0 0%, #ffd24a 40%, #f5a524 65%, #fff3b0 100%); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; animation: brilho 5s linear infinite; filter: drop-shadow(0 4px 20px rgba(255,210,74,.35)); }
+        .ap-titulo.pop { animation: brilho 5s linear infinite, popTitulo .6s cubic-bezier(.2,1.6,.4,1); }
+        @keyframes popTitulo { 0% { transform: scale(.6); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+        .ap-rodape { bottom: 2.2vh; left: 24px; right: 24px; z-index: 3; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+        .ap-dica { color: var(--mut); font-size: .85em; font-weight: 600; letter-spacing: .5px; animation: piscaDica 2.4s ease-in-out infinite; }
+        @keyframes piscaDica { 0%,100% { opacity: .45; } 50% { opacity: 1; } }
+        .ap-ctrl { display: flex; gap: 8px; }
+        .ap-ctrl button { background: rgba(255,255,255,.06); border: 1px solid var(--line2); color: var(--mut2); padding: 7px 14px; border-radius: 20px; font-family: inherit; font-weight: 700; font-size: .8em; cursor: pointer; }
+        .ap-ctrl button:hover { background: rgba(255,255,255,.15); color: #fff; }
+        .ap-flash { inset: 0; z-index: 4; background: #fff; opacity: 0; pointer-events: none; }
+        .ap-flash.bang { animation: flashBang .9s ease-out; }
+        @keyframes flashBang { 0% { opacity: .95; } 100% { opacity: 0; } }
+
+        .ap-cena { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; transform: scale(.95); transition: opacity .7s ease, transform .7s ease; pointer-events: none; padding: 0 16px; }
+        .ap-cena.ativa { opacity: 1; transform: none; }
+
+        /* Intro */
+        .ap-trofeu-grande { width: clamp(130px, 24vh, 250px); animation: flutuaTrofeu 3.2s ease-in-out infinite; filter: drop-shadow(0 0 40px rgba(255,210,74,.6)); }
+        .ap-trofeu-grande svg { width: 100%; height: auto; display: block; }
+        .ap-pergunta { font-family: var(--font-t); font-weight: 800; text-align: center; font-size: clamp(1.6rem, 4.6vw, 4.2rem); line-height: 1.05; margin-top: 3vh; }
+        .ap-pergunta span { color: var(--gold); text-shadow: 0 0 30px rgba(255,210,74,.55); }
+        .ap-info { margin-top: 2vh; color: var(--mut2); font-weight: 700; letter-spacing: 2px; font-size: clamp(.8rem, 1.4vw, 1.1rem); text-transform: uppercase; }
+
+        /* Lista 10º–4º */
+        .ap-lista-itens { width: min(760px, 94vw); }
+        .ap-li { display: grid; grid-template-columns: 64px 1fr auto; gap: 16px; align-items: center; background: rgba(22,33,61,.9); border: 1px solid var(--line2); border-left: 5px solid var(--cyan); border-radius: 14px; padding: clamp(6px, 1.2vh, 12px) 20px; margin: clamp(4px, .9vh, 9px) 0; opacity: 0; transform: translateX(-80px); }
+        .ap-lista.ativa .ap-li { animation: entraLi .65s cubic-bezier(.2,1.3,.4,1) forwards; }
+        @keyframes entraLi { to { opacity: 1; transform: none; } }
+        .ap-li .lp { font-family: var(--font-t); font-weight: 800; font-size: clamp(1.1rem, 2.2vw, 1.8rem); color: var(--cyan); }
+        .ap-li .ln { font-weight: 800; font-size: clamp(.95rem, 1.7vw, 1.35rem); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .ap-li .ln small { display: block; color: var(--mut2); font-weight: 600; font-size: .7em; text-transform: uppercase; letter-spacing: 1px; }
+        .ap-li .lt { font-family: var(--font-t); font-weight: 800; color: var(--gold); font-size: clamp(1rem, 2vw, 1.6rem); white-space: nowrap; }
+
+        /* Pódio */
+        .ap-podio { flex-direction: row; align-items: flex-end; justify-content: center; gap: clamp(10px, 3vw, 46px); }
+        .ap-slot { display: flex; flex-direction: column; align-items: center; transition: opacity .8s ease, filter .8s ease; position: relative; }
+        .ap-slot.apagado { opacity: .28; filter: grayscale(.7) blur(1px); }
+        .ap-slot-1 { --cor: #ffd24a; --glow: rgba(255,210,74,.75); --w: clamp(165px, 21vw, 300px); --h: clamp(250px, 46vh, 430px); --b: clamp(60px, 13vh, 130px); z-index: 2; }
+        .ap-slot-2 { --cor: #cfd6e4; --glow: rgba(207,214,228,.6); --w: clamp(145px, 17.5vw, 255px); --h: clamp(220px, 39vh, 370px); --b: clamp(42px, 9vh, 92px); }
+        .ap-slot-3 { --cor: #e09155; --glow: rgba(224,145,85,.6); --w: clamp(145px, 17.5vw, 255px); --h: clamp(220px, 39vh, 370px); --b: clamp(28px, 6vh, 62px); }
+        .ap-card { position: relative; width: var(--w); height: var(--h); perspective: 1400px; }
+        .ap-raios { position: absolute; left: 50%; top: 42%; width: 280%; aspect-ratio: 1; z-index: 0; pointer-events: none; opacity: 0; transition: opacity 1.2s ease .5s;
+            background: repeating-conic-gradient(from 0deg, var(--glow) 0deg 7deg, transparent 7deg 22deg);
+            -webkit-mask-image: radial-gradient(circle, #000 12%, transparent 62%); mask-image: radial-gradient(circle, #000 12%, transparent 62%);
+            animation: girarRaios 16s linear infinite; }
+        @keyframes girarRaios { from { transform: translate(-50%,-50%) rotate(0deg); } to { transform: translate(-50%,-50%) rotate(360deg); } }
+        .ap-slot.revelado .ap-raios { opacity: .5; }
+        .ap-slot-1.revelado .ap-raios { opacity: .8; }
+        .ap-gira { position: absolute; inset: 0; z-index: 1; transform-style: preserve-3d; transition: transform 1.1s cubic-bezier(.3,1.35,.5,1); }
+        .ap-slot.revelado .ap-gira { transform: rotateY(180deg); }
+        .ap-face { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; border-radius: 22px; display: flex; flex-direction: column; align-items: center; text-align: center; overflow: hidden; padding: 16px 12px; }
+        .ap-frente { justify-content: center; background: linear-gradient(160deg, #1c2a56 0%, #0a1020 100%); border: 2px solid var(--cor); box-shadow: 0 0 34px var(--glow), inset 0 0 40px rgba(0,0,0,.6); }
+        .ap-q { font-family: var(--font-t); font-weight: 800; font-size: calc(var(--h) * .42); line-height: 1; color: var(--cor); text-shadow: 0 0 34px var(--glow); animation: pulsaQ 1.6s ease-in-out infinite; }
+        .ap-frente .ap-poslbl { margin-top: 10px; }
+        .ap-verso { transform: rotateY(180deg); justify-content: flex-start; padding-top: 20px; background: linear-gradient(180deg, #24346a 0%, #0b1224 75%); border: 3px solid var(--cor); box-shadow: 0 0 60px var(--glow), inset 0 0 30px rgba(255,255,255,.05); }
+        .ap-foto { width: calc(var(--w) * .64); aspect-ratio: 1; border-radius: 50%; object-fit: cover; object-position: center 15%; border: 4px solid var(--cor); box-shadow: 0 0 30px var(--glow); background: #0b0f19; flex: 0 0 auto; }
+        .ap-poslbl { margin-top: 12px; font-weight: 900; letter-spacing: 3px; color: var(--cor); font-size: clamp(.75rem, 1.2vw, 1.05rem); }
+        .ap-nome { font-family: var(--font-t); font-weight: 800; font-size: clamp(1.15rem, 2.4vw, 2.2rem); line-height: 1.1; margin-top: 4px; max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .ap-fil { color: var(--mut2); font-weight: 700; font-size: clamp(.65rem, 1vw, .9rem); text-transform: uppercase; margin-top: 6px; letter-spacing: 1px; max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .ap-pts { margin-top: auto; font-family: var(--font-t); font-weight: 800; font-size: clamp(1.2rem, 2.5vw, 2.3rem); color: var(--cor); text-shadow: 0 0 18px var(--glow); }
+        .ap-base { width: calc(var(--w) + 28px); height: var(--b); margin-top: 14px; border-radius: 12px 12px 0 0; background: linear-gradient(180deg, #1f2e5c, #0a1020); border: 2px solid var(--cor); border-bottom: none; display: flex; justify-content: center; align-items: flex-start; padding-top: 4px; font-family: var(--font-t); font-weight: 800; font-size: calc(var(--b) * .55); line-height: 1; color: var(--cor); text-shadow: 0 0 18px var(--glow); box-shadow: 0 -6px 30px rgba(0,0,0,.4); }
+
+        @media (max-width: 700px) {
+            .ap-slot-1 { --w: 31vw; --h: 36vh; }
+            .ap-slot-2, .ap-slot-3 { --w: 27vw; --h: 31vh; }
+            .ap-face { padding: 10px 6px; }
+            .ap-rodape { left: 10px; right: 10px; }
+            .ap-dica { display: none; }
+        }
+
+        /* ===== TEASER BLACK DAS BLACK'S ===== */
+        .teaser-black { container-type: inline-size; position: relative; overflow: hidden; text-align: center; margin: 14px auto 4px; max-width: 560px; padding: 26px 16px 24px; border-radius: 18px; border: 1px solid rgba(255,255,255,.08);
+            background: radial-gradient(circle at 92% 0%, rgba(214,20,90,.55) 0%, transparent 50%), radial-gradient(circle at 0% 100%, rgba(110,20,170,.6) 0%, transparent 52%), radial-gradient(circle at 100% 100%, rgba(10,120,130,.45) 0%, transparent 45%), #030305;
+            box-shadow: 0 16px 40px rgba(0,0,0,.6), 0 0 40px rgba(214,20,90,.15); }
+        .teaser-black .tb-vem { display: inline-block; font-weight: 900; letter-spacing: .3em; font-size: clamp(.7rem, 3.4cqw, 1rem); color: #fff; background: linear-gradient(90deg, #ff2d75, #a23cff); padding: 5px 14px; border-radius: 30px; box-shadow: 0 0 18px rgba(255,45,117,.55); animation: pulsaQ 1.8s ease-in-out infinite; }
+        .teaser-black .tb-sub { margin-top: 12px; font-weight: 800; letter-spacing: .32em; color: #dfe3ee; font-size: clamp(.6rem, 2.9cqw, .9rem); }
+        .teaser-black .tb-big { font-family: 'Inter', sans-serif; font-weight: 900; line-height: .95; font-size: clamp(2.4rem, 19cqw, 5.5rem); letter-spacing: -.01em;
+            background: linear-gradient(100deg, #8c8c96 0%, #ffffff 35%, #b8b8c4 50%, #ffffff 65%, #8c8c96 100%); background-size: 220% auto; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 14px rgba(255,255,255,.28)); animation: brilho 4s linear infinite; }
+        .teaser-black .tb-das { font-weight: 900; color: #ffd24a; letter-spacing: .3em; font-size: clamp(1rem, 6.5cqw, 1.9rem); margin: 2px 0 0 .3em; text-shadow: 0 0 16px rgba(255,210,74,.6); }
+        .teaser-black .tb-linha { height: 3px; width: 82%; margin: 14px auto 12px; border-radius: 3px; background: linear-gradient(90deg, #22d3ee, #7c3aed, #ff2d55, #ff9f1c, #ffd24a); background-size: 200% 100%; animation: brilho 3s linear infinite; box-shadow: 0 0 12px rgba(255,45,85,.5); }
+        .teaser-black .tb-aguardem { font-weight: 900; letter-spacing: .35em; color: #ffd24a; font-size: clamp(.85rem, 4.6cqw, 1.35rem); margin-left: .35em; animation: piscaAguardem 1.6s ease-in-out infinite; }
+        @keyframes piscaAguardem { 0%,100% { opacity: .55; text-shadow: none; } 50% { opacity: 1; text-shadow: 0 0 18px rgba(255,210,74,.8); } }
+        .ap-nome.multi { white-space: normal; font-size: clamp(1rem, 1.9vw, 1.7rem); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+        #aba-ranking .banner-suspense-admin { margin-bottom: 10px; }
+        .banner-suspense-admin { border-radius: 14px; margin: 0 0 10px !important; max-width: none; width: 100%; padding: 8px 12px; justify-content: space-between; text-align: left; position: relative; z-index: 5; }
     </style>
 </head>
 <body>
@@ -445,6 +569,10 @@
         <button class="tab-btn" id="btn-tab-premios" onclick="trocarAba('premios')">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"></polyline><rect x="2" y="7" width="20" height="5"></rect><line x1="12" y1="22" x2="12" y2="7"></line><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path></svg>
             <span>Prêmios</span>
+        </button>
+        <button class="tab-btn" id="btn-tab-apresentar" onclick="abrirApresentacao()" style="display: none;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"></rect><polygon points="10 7 15 10 10 13 10 7"></polygon><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+            <span>Apresentar</span>
         </button>
         <button class="tab-btn tab-logout" id="btn-logout" onclick="fazerLogout()" style="display: none;">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
@@ -513,6 +641,10 @@
         </div>
 
         <div class="secao-lista-wrapper">
+            <div id="banner-suspense-admin" class="banner-suspense-admin" data-html2canvas-ignore="true">
+                <span>🔒 <b>Suspense ativo</b> — só você vê o resultado.</span>
+                <button class="btn-top10 btn-apresentar" onclick="abrirApresentacao()">🎬 Apresentar</button>
+            </div>
             <input type="text" id="busca-ranking" class="busca-ranking" placeholder="🔍 Pesquisar filial ou cidade..." onkeyup="filtrarSelecao('ranking')" data-html2canvas-ignore="true">
             <div class="secao-lista" id="lista-selecao-ranking">
                 <div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div>
@@ -665,6 +797,25 @@
     </button>
 </div>
 
+<!-- MODO APRESENTAÇÃO (admin) -->
+<div id="apresentacao" data-html2canvas-ignore="true">
+    <div class="ap-luzes"></div>
+    <div class="ap-palco" id="ap-palco"></div>
+    <div class="ap-vinheta"></div>
+    <div class="ap-topo">
+        <div class="ap-sub" id="ap-sub"></div>
+        <div class="ap-titulo" id="ap-titulo"></div>
+    </div>
+    <div class="ap-rodape">
+        <span class="ap-dica" id="ap-dica"></span>
+        <div class="ap-ctrl">
+            <button onclick="apTelaCheia()">⛶ Tela cheia (F)</button>
+            <button onclick="fecharApresentacao()">✕ Sair (ESC)</button>
+        </div>
+    </div>
+    <div class="ap-flash" id="ap-flash"></div>
+</div>
+
 <audio id="som-vitoria" src="senna.mp3" preload="auto"></audio>
 <audio id="som-prata" src="prata.mp3" preload="auto"></audio>
 <audio id="som-bronze" src="bronze.mp3" preload="auto"></audio>
@@ -684,6 +835,16 @@
     let seniorLogadoNome = null;
     let mapaNomesQuadro = {};
     let abaPendente = null;
+
+    // ==========================================
+    // 🔒 MODO SUSPENSE
+    // ativo: true  → o público NÃO vê pódio nem ranking (só o Master logado vê).
+    //                Deixe true enquanto atualiza a planilha e até a premiação.
+    // ativo: false → tudo liberado. Volte para false depois da apresentação.
+    // mes / ano    → mês que está sendo apurado (aparece no título).
+    // ==========================================
+    const SUSPENSE = { ativo: true, mes: 'OUTUBRO', ano: 2026 };
+    function rankingOculto() { return SUSPENSE.ativo && !isMasterLogado; }
 
     // ==========================================
     // EFEITOS VISUAIS (padrão Troféu Global)
@@ -842,6 +1003,7 @@
         document.getElementById('input-usuario').value = '';
         document.getElementById('input-senha').value = '';
 
+        aplicarSuspenseRanking();
         trocarAba('ranking');
     }
 
@@ -882,6 +1044,7 @@
             fecharLogin();
 
             document.getElementById('btn-logout').style.display = 'flex';
+            aplicarSuspenseRanking();
 
             if(abaPendente) {
                 executarTrocaAba(abaPendente);
@@ -978,9 +1141,12 @@
 
     const meses = ['JANEIRO', 'FEVEREIRO', 'MARÇO', 'ABRIL', 'MAIO', 'JUNHO', 'JULHO', 'AGOSTO', 'SETEMBRO', 'OUTUBRO', 'NOVEMBRO', 'DEZEMBRO'];
     const dataAtual = new Date();
-    document.getElementById('titulo-dashboard').innerText = `🏆 REGIONAL CAMPO BOM - NSL SÊNIOR ${meses[dataAtual.getMonth()]} - ${dataAtual.getFullYear()} 🏆`;
-    document.getElementById('sb-sub').innerText = `REGIONAL CAMPO BOM • ${meses[dataAtual.getMonth()]} ${dataAtual.getFullYear()}`;
-    document.title = `NSL Sênior - Regional Campo Bom - ${meses[dataAtual.getMonth()]} ${dataAtual.getFullYear()}`;
+    const MES_REF = SUSPENSE.ativo ? SUSPENSE.mes : meses[dataAtual.getMonth()];
+    const ANO_REF = SUSPENSE.ativo ? SUSPENSE.ano : dataAtual.getFullYear();
+    window.MES_TITULO = MES_REF + ' ' + ANO_REF;
+    document.getElementById('titulo-dashboard').innerText = `🏆 REGIONAL CAMPO BOM - NSL SÊNIOR ${MES_REF} - ${ANO_REF} 🏆`;
+    document.getElementById('sb-sub').innerText = `REGIONAL CAMPO BOM • ${MES_REF} ${ANO_REF}`;
+    document.title = `NSL Sênior - Regional Campo Bom - ${MES_REF} ${ANO_REF}`;
 
     let listaCompletaSeniores = [];
     let filialAtiva = null;
@@ -1392,11 +1558,59 @@
         popularSelectFiliais(listaCompletaSeniores);
         atualizarRelogioSincronizacao();
         aplicarTravaSenior();
+        aplicarSuspenseRanking();
 
         if (filialAtiva) {
             if(document.getElementById('aba-metas').classList.contains('active')) abrirDetalhe(filialAtiva);
             else if(document.getElementById('aba-colaborador').classList.contains('active')) abrirDetalheColab(filialAtiva);
             else if(document.getElementById('aba-simulador').classList.contains('active')) abrirDetalheSimulador(filialAtiva);
+        }
+    }
+
+    // ==========================================
+    // MODO SUSPENSE — o que o público vê no Ranking
+    // ==========================================
+    function htmlTeaserBlack() {
+        return `<div class="teaser-black">
+                <div class="tb-vem">✦ VEM AÍ ✦</div>
+                <div class="tb-sub">TROFÉU GLOBAL • EDIÇÃO</div>
+                <div class="tb-big">BLACK</div>
+                <div class="tb-das">DAS</div>
+                <div class="tb-big">BLACK'S</div>
+                <div class="tb-linha"></div>
+                <div class="tb-aguardem">AGUARDEM!</div>
+            </div>`;
+    }
+
+    function preencherPodioMisterio(p) {
+        const elNome = document.getElementById('nome-' + p);
+        elNome.classList.remove('nome-multi');
+        elNome.innerText = '???';
+        document.getElementById('filial-' + p).innerText = 'REVELAÇÃO NA PREMIAÇÃO';
+        document.getElementById('pontos-' + p).innerText = '?? pts';
+        const av = document.getElementById('avatar-' + p);
+        av.style.display = 'flex';
+        av.innerHTML = '<div class="avatar-misterio">?</div>';
+    }
+
+    function aplicarSuspenseRanking() {
+        const lista = listaCompletaSeniores;
+        const banner = document.getElementById('banner-suspense-admin');
+        if (banner) banner.style.display = (SUSPENSE.ativo && isMasterLogado) ? 'flex' : 'none';
+        document.getElementById('btn-tab-apresentar').style.display = isMasterLogado ? 'flex' : 'none';
+        if (!lista.length) return;
+        const busca = document.getElementById('busca-ranking');
+        if (rankingOculto()) {
+            [1, 2, 3].forEach(preencherPodioMisterio);
+            document.getElementById('lista-selecao-ranking').innerHTML = htmlTeaserBlack();
+            busca.style.display = 'none';
+        } else {
+            busca.style.display = '';
+            if (lista.length > 0) preencherPodio(1, lista[0], 'ffd700', 180);
+            if (lista.length > 1) preencherPodio(2, lista[1], 'C0C0C0', 160);
+            if (lista.length > 2) preencherPodio(3, lista[2], 'CD7F32', 150);
+            popularSelectFiliais(lista);
+            aplicarTravaSenior();
         }
     }
 
@@ -1773,6 +1987,353 @@
             showToast("Ocorreu um erro ao gerar a imagem.", 'erro');
         }
     }
+
+/* ===== Auxiliares da apresentação ===== */
+const apSomOuro = document.getElementById('som-vitoria');
+const apSomPrata = document.getElementById('som-prata');
+const apSomBronze = document.getElementById('som-bronze');
+function apEsc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function apNome(s) {
+    if (s.nomesQuadro && s.nomesQuadro.length > 1) {
+        const p = s.nomesQuadro.map(x => formatarNomeWhats(x.split(' ')[0]));
+        return p.length === 2 ? p.join(' e ') : p.slice(0, -1).join(', ') + ' e ' + p[p.length - 1];
+    }
+    return s.senior;
+}
+function apContar(root) {
+    root.querySelectorAll('.ap-contar').forEach(el => {
+        const v = parseFloat(el.dataset.apValor) || 0, t0 = performance.now(), d = 1500;
+        (function f(t) {
+            const pr = Math.min((t - t0) / d, 1), e = 1 - Math.pow(1 - pr, 3);
+            el.innerText = (v * e).toFixed(1).replace('.', ',');
+            if (pr < 1) requestAnimationFrame(f);
+        })(t0);
+    });
+}
+function apTocarMedalha(p) {
+    const a = p === 2 ? apSomPrata : apSomBronze;
+    [apSomOuro, apSomPrata, apSomBronze].forEach(x => { try { x && x.pause(); } catch (e) {} });
+    try { if (a) { a.currentTime = 0; a.play().catch(() => {}); } } catch (e) {}
+}
+
+/* =========================================================
+   MODO APRESENTAÇÃO (somente admin)
+   Avançar: clique, ESPAÇO, ENTER, → ou PageDown (passador de slides)
+   F = tela cheia • ESC = sair
+   ========================================================= */
+let apEtapas = [], apEtapa = 0, apOcupado = false, apAberta = false, apTimers = [], apCtx = null;
+const CORES_OURO = ['#ffd24a', '#fff3b0', '#f5a524', '#ffffff', '#22d3ee'];
+const CORES_PRATA = ['#cfd6e4', '#ffffff', '#9aa6c0', '#22d3ee'];
+const CORES_BRONZE = ['#e09155', '#d98a4a', '#ffb27a', '#ffffff'];
+
+function apT(fn, ms) { const id = setTimeout(() => { if (apAberta) fn(); }, ms); apTimers.push(id); return id; }
+function apEl(id) { return document.getElementById(id); }
+
+function abrirApresentacao() {
+    if (!isMasterLogado) return showToast('Modo Apresentação disponível só para o Master.', 'erro');
+    const fs = listaCompletaSeniores;
+    if (fs.length < 3) return showToast('Dados ainda carregando — tente em alguns segundos.', 'erro');
+
+    apAberta = true; apEtapa = 0; apOcupado = false;
+    apEtapas = ['intro'];
+    if (fs.length > 3) apEtapas.push('lista');
+    apEtapas.push('podio', 'p3', 'p2', 'p1', 'fim');
+
+    const mes = window.MES_TITULO || '';
+    const trofeu = document.querySelector('.trofeu-lado svg');
+    const fallback = (f, cor) => `https://ui-avatars.com/api/?name=${encodeURIComponent(apNome(f))}&background=${cor}&color=0b0f19&size=300&bold=true`;
+
+    const slot = (p) => {
+        const f = fs[p - 1], cor = p === 1 ? 'ffd700' : p === 2 ? 'C0C0C0' : 'CD7F32';
+        const fb = fallback(f, cor);
+        const foto = f.foto && f.foto.startsWith('http') ? f.foto : fb;
+        return `
+        <div class="ap-slot ap-slot-${p}" id="ap-slot-${p}">
+            <div class="ap-card">
+                <div class="ap-raios"></div>
+                <div class="ap-gira">
+                    <div class="ap-face ap-frente">
+                        <div class="ap-q">?</div>
+                        <div class="ap-poslbl">${p}º LUGAR</div>
+                    </div>
+                    <div class="ap-face ap-verso">
+                        <img class="ap-foto" src="${apEsc(foto)}" alt="" onerror="this.onerror=null;this.src='${fb}';">
+                        <div class="ap-poslbl">${p === 1 ? '🏆 Nº 1 NSL SÊNIOR' : p + 'º LUGAR'}</div>
+                        <div class="ap-nome${(f.nomesQuadro && f.nomesQuadro.length > 1) ? ' multi' : ''}">${apEsc(apNome(f))}</div>
+                        <div class="ap-fil">FL ${apEsc(f.numFilial)} • ${apEsc(f.cidade)}</div>
+                        <div class="ap-pts"><span class="ap-contar" data-ap-valor="${f.pontos}">0</span> pts</div>
+                    </div>
+                </div>
+            </div>
+            <div class="ap-base">${p}</div>
+        </div>`;
+    };
+
+    const ultimo = Math.min(fs.length, 10);
+    let itens = '';
+    for (let i = 3; i < ultimo; i++) {
+        const f = fs[i], atraso = (ultimo - 1 - i) * 0.38;
+        itens += `
+        <div class="ap-li" style="animation-delay:${atraso.toFixed(2)}s">
+            <span class="lp">${i + 1}º</span>
+            <span class="ln">${apEsc(apNome(f))}<small>FL ${apEsc(f.numFilial)} • ${apEsc(f.cidade)}</small></span>
+            <span class="lt">${f.pontos.toFixed(1).replace('.', ',')} pts</span>
+        </div>`;
+    }
+
+    apEl('ap-palco').innerHTML = `
+        <div class="ap-cena ap-intro" id="ap-cena-intro">
+            <div class="ap-trofeu-grande">${trofeu ? trofeu.outerHTML : '🏆'}</div>
+            <div class="ap-pergunta">QUEM É O Nº 1 DO<br><span>NSL SÊNIOR?</span></div>
+            <div class="ap-info">${fs.length} filiais na disputa • apuração encerrada</div>
+        </div>
+        <div class="ap-cena ap-lista" id="ap-cena-lista">
+            <div class="ap-lista-itens">${itens}</div>
+        </div>
+        <div class="ap-cena ap-podio" id="ap-cena-podio">
+            ${slot(2)}${slot(1)}${slot(3)}
+        </div>`;
+
+    apEl('ap-sub').innerText = 'NSL SÊNIOR • REGIONAL CAMPO BOM';
+    apSetTitulo(mes);
+    const ap = apEl('apresentacao');
+    ap.className = 'show';
+    document.body.style.overflow = 'hidden';
+    apMostrarCena('intro');
+    apDica();
+    apAudio();
+    try { apSomOuro.load(); } catch (e) {}
+    apT(() => {
+        if (apSomOuro.error || apSomOuro.networkState === 3) {
+            showToast('⚠️ senna.mp3 não encontrado! Abra pelo site publicado (Vercel) ou coloque o arquivo na mesma pasta do index.html.', 'erro', 9000);
+        }
+    }, 1500);
+    if (document.documentElement.requestFullscreen && !document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(() => {});
+    }
+}
+
+function fecharApresentacao() {
+    apAberta = false;
+    apTimers.forEach(clearTimeout); apTimers = [];
+    try { confetti.reset(); } catch (e) {}
+    [apSomOuro, apSomPrata, apSomBronze].forEach(a => { try { a && a.pause(); } catch (e) {} });
+    apEl('apresentacao').className = '';
+    apEl('ap-palco').innerHTML = '';
+    document.body.style.overflow = '';
+    if (document.fullscreenElement && document.exitFullscreen) document.exitFullscreen().catch(() => {});
+}
+
+function apTelaCheia() {
+    if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
+    else if (document.documentElement.requestFullscreen) document.documentElement.requestFullscreen().catch(() => {});
+}
+
+function apMostrarCena(nome) {
+    document.querySelectorAll('#ap-palco .ap-cena').forEach(c => c.classList.toggle('ativa', c.id === 'ap-cena-' + nome));
+}
+
+function apSetTitulo(txt) {
+    const t = apEl('ap-titulo');
+    t.innerText = txt;
+    t.classList.remove('pop'); void t.offsetWidth; t.classList.add('pop');
+}
+
+function apDica() {
+    const prox = apEtapas[apEtapa + 1];
+    const textos = {
+        lista: '▶ Próximo: do 10º ao 4º lugar',
+        podio: '▶ Próximo: o pódio',
+        p3: '▶ Próximo: revelar o 3º lugar',
+        p2: '▶ Próximo: revelar o 2º lugar',
+        p1: '▶ Próximo: revelar o GRANDE CAMPEÃO',
+        fim: '▶ Próximo: encerramento'
+    };
+    apEl('ap-dica').innerText = prox ? textos[prox] + '  (clique / espaço)' : 'Fim! ESC para sair • clique para mais confete 🎉';
+}
+
+function apAvancar() {
+    if (!apAberta || apOcupado) return;
+    if (apEtapa >= apEtapas.length - 1) {
+        confetti({ particleCount: 160, spread: 120, startVelocity: 45, origin: { x: Math.random() * .6 + .2, y: .45 }, colors: CORES_OURO, zIndex: 10100 });
+        return;
+    }
+    apEtapa++;
+    const etapa = apEtapas[apEtapa];
+    const mes = window.MES_TITULO || '';
+
+    if (etapa === 'lista') {
+        apSetTitulo(`DO ${Math.min(listaCompletaSeniores.length, 10)}º AO 4º LUGAR`);
+        apMostrarCena('lista');
+        tocarWhoosh();
+        apOcupado = true; apT(() => { apOcupado = false; }, (Math.min(listaCompletaSeniores.length, 10) - 3) * 380 + 700);
+    } else if (etapa === 'podio') {
+        apSetTitulo('O PÓDIO DE ' + mes);
+        apMostrarCena('podio');
+        tocarWhoosh();
+        apOcupado = true; apT(() => { apOcupado = false; }, 900);
+    } else if (etapa === 'p3') {
+        apRevelar(3);
+    } else if (etapa === 'p2') {
+        apRevelar(2);
+    } else if (etapa === 'p1') {
+        apRevelar(1);
+    } else if (etapa === 'fim') {
+        apSetTitulo('PARABÉNS, CAMPEÕES! 🎉');
+        tocarPrato();
+        fogosOuro(5000);
+    }
+    apDica();
+}
+
+function apRevelar(p) {
+    apOcupado = true;
+    const ap = apEl('apresentacao');
+    const slot = apEl('ap-slot-' + p);
+    const ouro = p === 1;
+    const durRufar = ouro ? 3600 : 1700;
+
+    apSetTitulo(ouro ? 'E o 1º lugar do NSL Sênior é...' : `E o ${p}º lugar é...`);
+    if (ouro) {
+        ap.classList.add('tensao');
+        document.querySelectorAll('.ap-slot-2, .ap-slot-3').forEach(s => s.classList.add('apagado'));
+    }
+    tocarRufar(durRufar);
+    tremer(slot.querySelector('.ap-card'), durRufar, ouro ? 9 : 4);
+
+    apT(() => {
+        const fl = apEl('ap-flash');
+        fl.classList.remove('bang'); void fl.offsetWidth; fl.classList.add('bang');
+        tocarPrato();
+        slot.classList.add('revelado');
+        apT(() => apContar(slot), 450);
+
+        if (ouro) {
+            ap.classList.remove('tensao');
+            ap.classList.add('ouro');
+            tocarSenna();
+            apSetTitulo('🏆 Nº 1 NSL SÊNIOR • ' + (window.MES_TITULO || '') + ' 🏆');
+            fogosOuro(8000);
+            apT(() => document.querySelectorAll('.ap-slot-2, .ap-slot-3').forEach(s => s.classList.remove('apagado')), 2600);
+            apT(() => { apOcupado = false; }, 2800);
+        } else {
+            const r = slot.getBoundingClientRect();
+            const o = { x: (r.left + r.width / 2) / innerWidth, y: (r.top + r.height / 3) / innerHeight };
+            const cores = p === 2 ? CORES_PRATA : CORES_BRONZE;
+            confetti({ particleCount: 170, spread: 100, startVelocity: 42, origin: o, colors: cores, zIndex: 10100 });
+            apT(() => confetti({ particleCount: 80, spread: 140, startVelocity: 28, origin: o, colors: cores, zIndex: 10100 }), 350);
+            apSetTitulo(`${p}º LUGAR`);
+            apTocarMedalha(p);
+            apT(() => { apOcupado = false; }, 1300);
+        }
+    }, durRufar);
+}
+
+function tocarSenna() {
+    try {
+        [apSomPrata, apSomBronze].forEach(a => { try { a && a.pause(); } catch (e) {} });
+        apSomOuro.pause();
+        apSomOuro.currentTime = 0;
+        apSomOuro.volume = 1;
+        const p = apSomOuro.play();
+        if (p) p.catch(() => showToast('🎵 Não consegui tocar o senna.mp3 — ele precisa estar na mesma pasta do site.', 'erro', 7000));
+    } catch (e) {}
+}
+
+function tremer(el, ms, max) {
+    const t0 = performance.now();
+    function f(t) {
+        const pr = Math.min((t - t0) / ms, 1);
+        const a = 0.5 + pr * pr * max;
+        el.style.transform = `translate(${(Math.random() - .5) * a}px, ${(Math.random() - .5) * a}px) rotate(${(Math.random() - .5) * a * .35}deg) scale(${1 + pr * .04})`;
+        if (pr < 1 && apAberta) requestAnimationFrame(f); else el.style.transform = '';
+    }
+    requestAnimationFrame(f);
+}
+
+function fogosOuro(ms) {
+    const fim = Date.now() + ms;
+    (function laterais() {
+        if (!apAberta) return;
+        confetti({ particleCount: 5, angle: 60, spread: 60, origin: { x: 0, y: .75 }, colors: CORES_OURO, zIndex: 10100 });
+        confetti({ particleCount: 5, angle: 120, spread: 60, origin: { x: 1, y: .75 }, colors: CORES_OURO, zIndex: 10100 });
+        if (Date.now() < fim) requestAnimationFrame(laterais);
+    })();
+    for (let d = 0; d < ms - 800; d += 750) {
+        apT(() => {
+            confetti({ particleCount: 110, spread: 360, startVelocity: 32, ticks: 90, gravity: .9, origin: { x: Math.random() * .7 + .15, y: Math.random() * .35 + .1 }, colors: CORES_OURO, zIndex: 10100 });
+            tocarEstouro();
+        }, d);
+    }
+}
+
+/* ===== Sons sintetizados (não precisa de arquivo) ===== */
+function apAudio() {
+    if (!apCtx) { try { apCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) { return null; } }
+    if (apCtx.state === 'suspended') apCtx.resume();
+    return apCtx;
+}
+function apRuido(ctx, dur) {
+    const b = ctx.createBuffer(1, Math.max(1, Math.floor(ctx.sampleRate * dur)), ctx.sampleRate);
+    const d = b.getChannelData(0);
+    for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
+    return b;
+}
+function tocarRufar(ms) {
+    const ctx = apAudio(); if (!ctx) return;
+    const buf = apRuido(ctx, 0.09), t0 = ctx.currentTime + 0.02, dur = ms / 1000;
+    let t = 0;
+    while (t < dur) {
+        const pr = t / dur;
+        const src = ctx.createBufferSource(); src.buffer = buf;
+        const f = ctx.createBiquadFilter(); f.type = 'bandpass'; f.frequency.value = 170 + pr * 140; f.Q.value = 0.9;
+        const g = ctx.createGain(), v = 0.12 + pr * 0.6;
+        g.gain.setValueAtTime(v, t0 + t); g.gain.exponentialRampToValueAtTime(0.001, t0 + t + 0.08);
+        src.connect(f); f.connect(g); g.connect(ctx.destination);
+        src.start(t0 + t); src.stop(t0 + t + 0.09);
+        t += Math.max(0.032, 0.095 - pr * 0.065);
+    }
+}
+function tocarPrato() {
+    const ctx = apAudio(); if (!ctx) return;
+    const t0 = ctx.currentTime;
+    const o = ctx.createOscillator(), og = ctx.createGain();
+    o.frequency.setValueAtTime(150, t0); o.frequency.exponentialRampToValueAtTime(40, t0 + 0.45);
+    og.gain.setValueAtTime(1, t0); og.gain.exponentialRampToValueAtTime(0.001, t0 + 0.55);
+    o.connect(og); og.connect(ctx.destination); o.start(t0); o.stop(t0 + 0.6);
+    const src = ctx.createBufferSource(); src.buffer = apRuido(ctx, 2.6);
+    const hp = ctx.createBiquadFilter(); hp.type = 'highpass'; hp.frequency.value = 4500;
+    const g = ctx.createGain(); g.gain.setValueAtTime(0.45, t0); g.gain.exponentialRampToValueAtTime(0.001, t0 + 2.5);
+    src.connect(hp); hp.connect(g); g.connect(ctx.destination); src.start(t0);
+}
+function tocarWhoosh() {
+    const ctx = apAudio(); if (!ctx) return;
+    const t0 = ctx.currentTime;
+    const src = ctx.createBufferSource(); src.buffer = apRuido(ctx, 0.7);
+    const f = ctx.createBiquadFilter(); f.type = 'bandpass'; f.Q.value = 1.2;
+    f.frequency.setValueAtTime(300, t0); f.frequency.exponentialRampToValueAtTime(3000, t0 + 0.6);
+    const g = ctx.createGain(); g.gain.setValueAtTime(0.001, t0); g.gain.exponentialRampToValueAtTime(0.25, t0 + 0.3); g.gain.exponentialRampToValueAtTime(0.001, t0 + 0.7);
+    src.connect(f); f.connect(g); g.connect(ctx.destination); src.start(t0);
+}
+function tocarEstouro() {
+    const ctx = apAudio(); if (!ctx) return;
+    const t0 = ctx.currentTime;
+    const src = ctx.createBufferSource(); src.buffer = apRuido(ctx, 0.5);
+    const f = ctx.createBiquadFilter(); f.type = 'lowpass'; f.frequency.value = 1800;
+    const g = ctx.createGain(); g.gain.setValueAtTime(0.07, t0); g.gain.exponentialRampToValueAtTime(0.001, t0 + 0.45);
+    src.connect(f); f.connect(g); g.connect(ctx.destination); src.start(t0);
+}
+
+apEl('apresentacao').addEventListener('click', e => {
+    if (e.target.closest('.ap-ctrl')) return;
+    apAvancar();
+});
+document.addEventListener('keydown', e => {
+    if (!apAberta) return;
+    if ([' ', 'Enter', 'ArrowRight', 'ArrowDown', 'PageDown'].includes(e.key)) { e.preventDefault(); apAvancar(); }
+    else if (e.key === 'Escape') { fecharApresentacao(); }
+    else if (e.key === 'f' || e.key === 'F') { apTelaCheia(); }
+});
 </script>
 </body>
 </html>
